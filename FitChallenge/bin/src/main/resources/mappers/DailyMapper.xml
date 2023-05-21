@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.fitchallenge.model.dao.DailyDao">
+	<!-- 데일리 등록
+	public int insertDaily(Daily daily);
+	
+	//유저 id와 기간에 맞는 데일리 기록 가져오기
+	public List<Daily> selectDailyByUser(DailySearchCondition condition);
+	
+	//팀 id와 기간에 맞는 데일리 기록 가져오기
+	public List<Daily> selectDailyByTeam(DailySearchCondition condition);
+	
+	//데일리 id로 데일리 1개 정보 가져오기
+	public Daily selectDaily(int dailyId); -->
+
+</mapper>

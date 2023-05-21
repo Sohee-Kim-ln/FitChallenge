@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.ssafy.fitchallenge.model.dao.GoalDao">
+ 
+ 	<!-- 팀 목표 생성 -->
+ 	<insert id="insertGoal" parameterType="Goal" keyProperty="goalId" useGeneratedKeys="true">
+ 		INSERT INTO `goal`(team_id,sports_id,goal_time,goal_distance)
+		VALUES (#{teamId},#{sportsId},#{goalTime},#{goalDistance});
+ 	</insert>
+ 	
+ 	<!-- 팀 id에 맞는 목표 리스트 가져오기 -->
+ 	<select id="selectGoals" parameterType="int" resultType="Goal">
+		SELECT goal_id as goalId, team_id as teamId, sports_id as sportsId, goal_time as goalTime, goal_distance as goalDistance
+		FROM goal
+		WHERE team_id=#{teamId};
+ 	</select>
+
+	<!-- 목표 id에 맞는 목표 1개 가져오기(팀 달성인원계산X) -->
+	<select id="selectGoal" parameterType="int" resultType="Goal">
+		SELECT goal_id as goalId, team_id as teamId, sports_id as sportsId, goal_time as goalTime, goal_distance as goalDistance
+		FROM goal
+		WHERE goal_id=#{goalId};
+	</select>
+	
+	<!-- 팀id와 스포츠 id에 맞는 목표 1개 가져오기	 -->
+	 <select id="selectGoalByTeamSports" parameterType="int" resultType="Goal">
+	 	SELECT goal_id as goalId, team_id as teamId, sports_id as sportsId, goal_time as goalTime, goal_distance as goalDistance
+	 	FROM goal
+	 	WHERE team_id=#{teamId} AND sports_id = #{sportsId};
+	 </select>
+	
+	<!-- 목표 id에 맞는 목표 안보이게 함 -->
+	<update id="updateVisible" parameterType="int">
+		UPDATE goal
+		SET visible=false
+		WHERE goal_id=#{goalId};
+	</update>
+ 
+ </mapper>

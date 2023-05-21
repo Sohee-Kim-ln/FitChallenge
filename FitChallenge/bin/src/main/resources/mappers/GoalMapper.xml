@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.ssafy.fitchallenge.model.dao.GoalDao">
+ 
+ <!--
+ 	//	팀 목표 생성
+	public int insertGoal(Goal goal);
+	
+	//	팀 id에 맞는 목표 리스트 가져오기
+	public List<Goal> selectGoals(int teamId);
+	
+	//	목표 id에 맞는 목표 1개 가져오기(팀 달성인원계산X)
+	public Goal selectGoal(int goalId);
+	
+	//	목표 id에 맞는 목표 1개 정보를 팀 달성인원 계산 후 가져오기
+	public Goal selectGoalCal(int goalId);
+
+	//	목표 id에 맞는 목표 안보이게 함
+	public int updateVisible(int goalId);
+ 
+ 
+ -->
+ 
+ </mapper>
