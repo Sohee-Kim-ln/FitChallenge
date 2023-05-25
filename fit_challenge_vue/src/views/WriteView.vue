@@ -1,12 +1,17 @@
 <template>
   <div>
-    <h1>입력 뷰</h1>
+    <header-nav-login/>
+    <router-view />
   </div>
 </template>
 
 <script>
+import HeaderNavLogin from '@/components/common/HeaderNavLogin.vue';
 export default {
     name: "WriteView",
+    components:{
+      HeaderNavLogin,
+    }
 }
 </script>
 

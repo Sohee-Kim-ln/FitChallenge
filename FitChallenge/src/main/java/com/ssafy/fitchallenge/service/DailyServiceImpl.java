@@ -20,6 +20,12 @@ public class DailyServiceImpl implements DailyService{
 	public int insertDaily(Daily daily) {
 		return dDao.insertDaily(daily);
 	}
+	
+	@Transactional
+	@Override
+	public int insertDailies(List<Daily> dailies) {
+		return dDao.insertDailies(dailies);
+	}
 
 	@Override
 	public List<Daily> selectDailyByUser(DailySearchCondition condition) {
@@ -35,6 +41,8 @@ public class DailyServiceImpl implements DailyService{
 	public Daily selectDaily(int dailyId) {
 		return dDao.selectDaily(dailyId);
 	}
+
+
 
 	
 	

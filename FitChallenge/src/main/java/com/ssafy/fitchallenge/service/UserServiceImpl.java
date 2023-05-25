@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService{
 
 	@Transactional
 	@Override
-	public int updateRecentLogin(int userId) {
+	public int updateRecentLogin(String userId) {
 		return uDao.updateRecentLogin(userId);
 	}
 

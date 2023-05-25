@@ -1,25 +1,26 @@
 <template>
   <div>
-    <h1>서치 리스트</h1>
-    <search-card/>
-    <search-card/>
-    <search-card/>
-    <search-card/>
-    <search-card/>
-    <search-card/>
+    <v-container mt-16 >
+      <v-row d>
+        <search-card v-for="(team, index) in teams" :key="index" :team="team" />
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
-import SearchCard from './include/SearchCard.vue';
-export default {
-    components:{
-        SearchCard,
-    },
+import { mapState } from "vuex";
+import SearchCard from "./include/SearchCard.vue";
 
-}
+export default {
+  components: {
+    SearchCard,
+  },
+  name: "SearchList",
+  computed: {
+    ...mapState(["teams"]),
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

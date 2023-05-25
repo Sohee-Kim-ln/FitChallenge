@@ -5,11 +5,11 @@
  
  <mapper namespace="com.ssafy.fitchallenge.model.dao.SportsDao">
  
- <!--
-    // 스포츠 id에 해당하는 스포츠 가져오기
-    public Sports selectSportsbyId(int sportsId);
- 
- 
- -->
+ <!-- 스포츠 id에 해당하는 스포츠 가져오기 -->
+ 	<select id="selectSportsbyId" parameterType="int" resultType="Sports">
+ 		SELECT sports_id as sportsId, sports_name as sportsName
+ 		FROM sports
+ 		WHERE sports_id=#{sportsId};
+ 	</select>
  
  </mapper>

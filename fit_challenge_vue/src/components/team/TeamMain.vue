@@ -1,13 +1,8 @@
 <template>
   <div>
-    <h1>팀 메인 뷰</h1>
     <team-goal/>
     <div>
-        팀 유저 카드 플로우
-        <team-user-card></team-user-card>
-        <team-user-card></team-user-card>
-        <team-user-card></team-user-card>
-        <team-user-card></team-user-card>
+        <team-user-list></team-user-list>
     </div>
   </div>
 </template>
@@ -16,12 +11,33 @@
 import TeamGoal from './include/TeamGoal.vue';
 import TeamUserCard from './include/TeamUserCard.vue';
 
+import { mapState } from 'vuex';
+import TeamUserList from './include/TeamUserList.vue';
+
 export default {
     name: "TeamMain",
     components:{
         TeamGoal,
         TeamUserCard,
-    }
+        TeamUserList,
+    },
+    data(){
+      return{
+
+      };
+    },
+    computed:{
+      ...mapState(["team"]),
+      ...mapState(["userCards"]),
+      ...mapState(["goals"]),
+    },
+    created(){
+      
+      //this.$route.params.teamId
+    },
+    methods:{
+
+    },
 }
 </script>
 

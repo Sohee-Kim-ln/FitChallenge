@@ -10,6 +10,7 @@ public class User {
 	private String recentLogin;
 	private int continued;
 	private String regDate;
+	private String joinDate;
 	private String userImg;
 	private String userImgOrg;
 	private int teamId;

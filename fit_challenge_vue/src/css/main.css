@@ -1,0 +1,10 @@
+/* .side-bar {
+  flex: 0 0 23rem;
+  background-color: rgb(190, 237, 255);
+  height: 100vh;
+} */
+
+.content-wrapper {
+  display: flex;
+}
+

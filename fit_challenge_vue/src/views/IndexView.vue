@@ -1,22 +1,18 @@
 <template>
   <div>
-    <HeaderNav/>
-    <h1>index 뷰</h1>
+    <HeaderNavIndex />
     <router-view />
   </div>
 </template>
 
 <script>
-import HeaderNav from "@/components/common/HeaderNav.vue";
+import HeaderNavIndex from "@/components/common/HeaderNavIndex.vue";
 export default {
-  name: 'Index',
-  components:{
-    HeaderNav,
+  name: "Index",
+  components: {
+    HeaderNavIndex,
   },
-}
+};
 </script>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>

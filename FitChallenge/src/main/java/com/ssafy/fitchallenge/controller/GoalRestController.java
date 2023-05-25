@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +33,10 @@ public class GoalRestController {
 
 	@ApiOperation(value = "팀 목표 생성")
 	@PostMapping("/create")
-	public ResponseEntity<?> createGoal(@RequestBody Goal goalDto) {
-		int result = gService.insertGoal(goalDto);
+	public ResponseEntity<?> createGoal(@RequestBody Goal goal) {
+		System.out.println(goal);
+		
+		int result = gService.insertGoal(goal);
 		if (result != 0)
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		else
@@ -63,6 +66,7 @@ public class GoalRestController {
 
 	@ApiOperation(value = "목표 id에 맞는 목표 안보이게 함")
 	@PutMapping("/invisible/{goalId}")
+	@CrossOrigin(origins = "http://localhost:8080")
 	public ResponseEntity<?> hideGoal(@PathVariable int goalId) {
 		int result = gService.updateVisible(goalId);
 		if (result != 0)

@@ -5,29 +5,64 @@
  
  <mapper namespace="com.ssafy.fitchallenge.model.dao.UserDao">
  
- <!--
-	// 회원가입
-	public int insertUser(User user);
-
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="User">
+		 INSERT INTO user(user_id, password, user_name,nickname, birth_date, 
+		 	gender, user_img, user_img_org)
+		 VALUES (#{userId}, #{password}, #{userName}, #{nickname},#{birthDate}, 
+		 	#{gender}, #{userImg}, #{userImgOrg});
+	</insert>
+	
+	<!-- 최근 접속일 업데이트 -->
+	<update id="updateRecentLogin" parameterType="String">
+		UPDATE user
+		SET recent_login = #{recentLogin}
+		WHERE user_id = #{userId};
+	</update>
+	
+	<!-- 
 	// 로그인 : 컨트롤러에서 처리? JWT면 유저 목록 확인을 위해 유저 id에 맞는 유저 정보 가져오기 사용
-
 	// 로그아웃
+	-->
+	
+	<!-- 유저 전체 가져오기 -->
+	<select id="selectUserAll" resultType="User">
+		SELECT user_id as userId, password, user_name as userName, nickname, birth_date as birthDate, gender, recent_login as recentLogin, continued, reg_date as regDate, user_img as userImg, user_img_org as userImgOrg, team_id as teamId, is_owner as isOwner
+		FROM user;
+	</select>
 
-	// 유저 전체 가져오기
-	public List<User> selectUserAll();
-
-	// 유저 id에 맞는 유저 정보 가져오기
-	public User selectUserById(String userId);
-
+	<!-- 유저 id에 맞는 유저 정보 가져오기 -->
+	<select id="selectUserById" parameterType="String" resultType="User">
+		SELECT user_id as userId, password, user_name as userName, nickname, birth_date as birthDate, gender, recent_login as recentLogin, continued, reg_date as regDate, user_img as userImg, user_img_org as userImgOrg, team_id as teamId, is_owner as isOwner
+		FROM user
+		WHERE user_id = #{userId};
+	</select>
 	
-	//팀 id에 맞는 유저들 목록 가져오기
-	public List<User> selectUserByTeam(int teamId);
+	<!-- 팀 id에 맞는 유저들 목록 가져오기 -->
+	<select id="selectUserByTeam" parameterType="int" resultType="User">
+		SELECT user_id as userId, password, user_name as userName, nickname, birth_date as birthDate, gender, recent_login as recentLogin, continued, reg_date as regDate, user_img as userImg, user_img_org as userImgOrg, team_id as teamId, is_owner as isOwner 
+		FROM user 
+		WHERE team_id = #{teamId};
+	</select>
 	
-	//팀 가입(유저 정보에 팀id 입력)
-	public int joinTeam(int teamId);
+	<!-- 팀 가입(유저 정보에 팀id 입력) -->
+	<!-- public int joinTeam(int teamId, String userId); -->
+	<update id="joinTeam" parameterType="Map">
+		UPDATE user
+		SET team_id = #{teamId}, reg_date=now()
+		WHERE user_id = #{userId};
+	</update>
+	
+	<!-- 팀 생성시 팀리더 유저의 isOwner true로 바꿈 -->
+	<!-- public int ownerTrue(String userId); -->
+	<update id="ownerTrue" parameterType="String">
+		UPDATE user
+		SET is_owner = true
+		WHERE user_id = #{userId};
+	</update>
 	
 	
-	// 이하 기능 구현은 후순위
+	<!--  // 이하 기능 구현은 후순위
 	
 	// 팀 탈퇴
 	
@@ -38,7 +73,6 @@
 	// 아이디 찾기
 
 	// 비밀번호 찾기
- 
- -->
+ 	-->
  
  </mapper>

@@ -10,3 +10,7 @@ public class FitChallengeApplication {
 		SpringApplication.run(FitChallengeApplication.class, args);
 	}
 }
+
+
+
+// http://localhost:9999/swagger-ui/index.html

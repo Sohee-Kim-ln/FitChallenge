@@ -16,7 +16,7 @@
 	<!-- 최근 접속일 업데이트 -->
 	<update id="updateRecentLogin" parameterType="String">
 		UPDATE user
-		SET recent_login = #{recentLogin}
+		SET recent_login = NOW()
 		WHERE user_id = #{userId};
 	</update>
 	
@@ -49,7 +49,7 @@
 	<!-- public int joinTeam(int teamId, String userId); -->
 	<update id="joinTeam" parameterType="Map">
 		UPDATE user
-		SET team_id = #{teamId}
+		SET team_id = #{teamId}, reg_date=now()
 		WHERE user_id = #{userId};
 	</update>
 	

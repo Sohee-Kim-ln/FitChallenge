@@ -10,6 +10,9 @@ public interface DailyDao {
 	//데일리 등록
 	public int insertDaily(Daily daily);
 	
+	//데일리 여러개 등록
+	public int insertDailies(List<Daily> dailies);
+	
 	//유저 id와 기간에 맞는 데일리 기록 가져오기
 	public List<Daily> selectDailyByUser(DailySearchCondition condition);
 	
@@ -18,6 +21,15 @@ public interface DailyDao {
 	
 	//위클리 계산을 위해 유저 id와 팀 id에 맞는 이번주 기록들을 위클리 형태로 가져오기
 	public List<Weekly> selectWeeklyToday(DailySearchCondition condition);
+	
+	// 주 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> weekStat(DailySearchCondition condition);
+	
+	// 월 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> monthStat(DailySearchCondition condition);
+	
+	// 년 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> yearStat(DailySearchCondition condition);
 	
 	//팀에 속한 유저들의, 팀 목표들에 해당하는 이번 주 위클리 전부 가져오기(성취도 계산 안함)
 	public List<Weekly> selectWeeklysThisWeek(int teamId);

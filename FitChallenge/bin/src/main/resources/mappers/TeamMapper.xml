@@ -5,34 +5,60 @@
  
  <mapper namespace="com.ssafy.fitchallenge.model.dao.TeamDao">
  
- <!--
-	//	팀 생성
-	public int insertTeam(Team team);
+	<!-- 팀 생성 -->
+	<insert id="insertTeam" parameterType="Team" useGeneratedKeys="true" keyProperty="teamId">
+		INSERT INTO team(team_name, max_capacity, info, team_img, team_img_org)
+		VALUES (#{teamName}, #{maxCapacity}, #{info}, #{teamImg}, #{teamImgOrg});
+	</insert>
 	
-	//	전체 팀 정보 가져오기
-	public List<Team> selectTeamAll();
+	<!-- 전체 팀 정보 가져오기 -->
+	<select id="selectTeamAll" resultType="Team">
+		SELECT team_id as teamId, team_name as teamName, create_time as createTime, max_capacity as maxCapacity, cur_capacity as curCapacity, info, announce, team_img as teamImg, team_img_org as teamImgOrg
+		FROM team;
+	</select>
 	
-	//	검색 조건에 맞는 팀 리스트 가져오기
-	public List<Team> selectTeams(TeamSearchCondition condition);
+	<!-- 검색 조건에 맞는 팀 리스트 가져오기 -->
+	<select id="selectTeams" parameterType="TeamSearchCondition" resultType="Team">
+		SELECT team_id as teamId, team_name as teamName, create_time as createTime, max_capacity as maxCapacity, cur_capacity as curCapacity, info, announce, team_img as teamImg, team_img_org as teamImgOrg
+		FROM team
+		WHERE team_name LIKE CONCAT('%', #{word}, '%')
+		<if test="orderBy != null">
+ 			ORDER BY ${orderBy};
+		</if>
+	</select>
 	
-	//	팀 id에 해당하는 팀 1개 정보 가져오기
-	public Team selectTeam(int teamId);
+	<!-- 팀 id에 해당하는 팀 1개 정보 가져오기 -->
+	<select id="selectTeam" parameterType="int" resultType="Team">
+		SELECT team_id as teamId, team_name as teamName, create_time as createTime, max_capacity as maxCapacity, cur_capacity as curCapacity, info, announce, team_img as teamImg, team_img_org as teamImgOrg
+		FROM team
+		WHERE team_id = #{teamId};
+	</select>
 	
+<!--  
 //	//후순위
 //	//	팀 id에 해당하는 팀 정보 수정
 //	public int updateTeam(int teamId);
+-->	
+
+	<!-- 팀 id에 해당하는 팀 현재 인원 ++ -->
+	<update id="addCapacity" parameterType="int">
+		UPDATE team
+		SET cur_capacity = cur_capacity + 1
+		WHERE team_id = #{teamId};
+	</update>
 	
-	//	팀 id에 해당하는 팀 현재 인원 ++
-	public int addCapacity(int teamId);
+	<!-- 팀 id에 해당하는 팀 현재 인원 - -->
+	<update id="substractCapacity" parameterType="int">
+		UPDATE team
+		SET cur_capacity = cur_capacity - 1
+		WHERE team_id = #{teamId};
+	</update>
 	
-	//	팀 id에 해당하는 팀 현재 인원 --
-	public int substractCapacity(int teamId);
 	
+<!--
 //	//후순위
 //	//	팀 id에 해당하는 팀 삭제
 //	public int deleteTeamById(int teamId);
- 
- 
  -->
  
  </mapper>

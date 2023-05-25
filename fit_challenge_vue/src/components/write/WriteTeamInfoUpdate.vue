@@ -1,12 +1,15 @@
+
+
+
+
+
 <template>
-  <div>
-    <h2>팀 생성 컴포넌트</h2>
+  <div class="container">
+   <h2>팀 수정 컴포넌트</h2>
   </div>
 </template>
 
 <script>
-export default {
-};
 </script>
 
 <style>

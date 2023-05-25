@@ -1,32 +1,34 @@
 <template>
   <div class="container">
-    <h2>팀 정보 컴포넌트</h2>
-    <div>팀 정보</div>
-    <team-goal/>
-  <div>
-    <h2>팀원 목록</h2>
-    <team-user-row/>
-    <team-user-row/>
-    <team-user-row/>
-    <team-user-row/>
-    <team-user-row/>
-  </div>
-
+    <team-info-box/>
+    <team-goal />
+    <team-member-list/>
   </div>
 </template>
 
 <script>
-import TeamGoal from './include/TeamGoal.vue';
-import TeamUserRow from './include/TeamUserRow.vue';
+import { mapState } from "vuex";
+import TeamInfoBox from "@/components/team/include/TeamInfoBox.vue"
+import TeamGoal from "./include/TeamGoal.vue";
+import TeamMemberList from "./include/TeamMemberList.vue";
+
 
 export default {
-  name:"TeamInfo",
-  components:{
+  name: "TeamInfo",
+  components: {
+    TeamInfoBox,
     TeamGoal,
-    TeamUserRow,
-  }
+    TeamMemberList
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState(["team"]),
+
+  },
+  created() {},
 };
 </script>
 
-<style>
-</style>
+<style></style>

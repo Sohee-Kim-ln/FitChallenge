@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema fitchallenge
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `fitchallenge`;DROP SCHEMA IF EXISTS `fitchallenge`;
+DROP SCHEMA IF EXISTS `fitchallenge`;
 CREATE SCHEMA IF NOT EXISTS `fitchallenge` DEFAULT CHARACTER SET utf8 ;
 USE `fitchallenge` ;
 
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `fitchallenge`.`team` (
   `team_name` VARCHAR(45) NOT NULL,
   `create_time` DATETIME NOT NULL DEFAULT now(),
   `max_capacity` INT NOT NULL,
-  `cur_capacity` INT NULL DEFAULT 1,
+  `cur_capacity` INT NULL DEFAULT 0,
   `info` VARCHAR(200) NOT NULL,
   `announce` VARCHAR(200) NULL,
   `team_img` VARCHAR(200) NULL,
@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `fitchallenge`.`goal` (
   PRIMARY KEY (`goal_id`, `team_id`, `sports_id`),
   INDEX `fk_goal_group1_idx` (`team_id` ASC) VISIBLE,
   INDEX `fk_goal_sports1_idx` (`sports_id` ASC) VISIBLE,
+  UNIQUE INDEX `goal_id_UNIQUE` (`goal_id` ASC) VISIBLE,
   CONSTRAINT `fk_goal_group1`
     FOREIGN KEY (`team_id`)
     REFERENCES `fitchallenge`.`team` (`team_id`)

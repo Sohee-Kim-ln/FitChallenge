@@ -5,11 +5,11 @@
  
  <mapper namespace="com.ssafy.fitchallenge.model.dao.PhraseDao">
  
- <!--
-    // 문구 아이디에 해당하는 문구 가져오기
-    public Phrase selectPhrasebyId(int phraseId);
- 
- 
- -->
+ <!-- 문구 아이디에 해당하는 문구 가져오기 -->
+ 	<select id="selectPhrasebyId" parameterType="int" resultType="Phrase">
+ 		SELECT phrase_id as phraseId, content
+ 		FROM phrase
+ 		WHERE phrase_id=#{phraseId};
+ 	</select>
  
  </mapper>

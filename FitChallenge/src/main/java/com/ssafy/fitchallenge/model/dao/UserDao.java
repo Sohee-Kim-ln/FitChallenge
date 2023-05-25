@@ -16,7 +16,7 @@ public interface UserDao {
 
 	
 	// 최근 접속일 업데이트
-	public int updateRecentLogin(int userId);
+	public int updateRecentLogin(String userId);
 	
 	// 유저 전체 가져오기
 	public List<User> selectUserAll();

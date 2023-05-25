@@ -53,6 +53,21 @@ public class WeeklyServiceImpl implements WeeklyService{
 		List<Weekly> wlist=dDao.selectWeeklysByYM(condition);
 		return null;
 	}
+
+	@Override
+	public List<Weekly> weekStat(DailySearchCondition condition) {
+		return dDao.weekStat(condition);
+	}
+
+	@Override
+	public List<Weekly> monthStat(DailySearchCondition condition) {
+		return dDao.monthStat(condition);
+	}
+
+	@Override
+	public List<Weekly> yearStat(DailySearchCondition condition) {
+		return dDao.yearStat(condition);
+	}
 	
 	
 }

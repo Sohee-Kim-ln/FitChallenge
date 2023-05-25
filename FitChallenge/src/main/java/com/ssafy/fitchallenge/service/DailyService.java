@@ -9,6 +9,9 @@ public interface DailyService {
 	//데일리 등록
 	public int insertDaily(Daily daily);
 	
+	//데일리 여러개 등록
+	public int insertDailies(List<Daily> dailies);
+	
 	//유저 id와 기간에 맞는 데일리 기록 가져오기
 	public List<Daily> selectDailyByUser(DailySearchCondition condition);
 	

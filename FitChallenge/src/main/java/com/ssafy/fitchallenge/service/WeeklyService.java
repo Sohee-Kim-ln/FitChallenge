@@ -16,6 +16,15 @@ public interface WeeklyService {
 //	public Weekly getWeekly(DailySearchCondition condition);
 //	
 	
+	// 주 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> weekStat(DailySearchCondition condition);
+	
+	// 월 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> monthStat(DailySearchCondition condition);
+	
+	// 년 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> yearStat(DailySearchCondition condition);
+	
 	//팀에 속한 유저들의, 팀 목표들에 해당하는 이번 주 위클리 전부 가져오기(성취도 계산 안함)
 	public List<Weekly> getTeamWeeklysThisWeek(int teamId);
 	

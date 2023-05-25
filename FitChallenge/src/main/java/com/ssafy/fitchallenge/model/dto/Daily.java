@@ -3,6 +3,7 @@ package com.ssafy.fitchallenge.model.dto;
 public class Daily {
 	private int dailyId;
 	private String userId;
+	private String nickname;
 	private int sportsId;
 	private String date;
 	private int dailyTime;
@@ -13,17 +14,22 @@ public class Daily {
 		
 	}
 
-	public Daily(int dailyId, String userId, int sportsId, String date, int dailyTime, int dailyDistance,
-			String comment) {
+	
+
+	public Daily(int dailyId, String userId, String nickname, int sportsId, String date, int dailyTime,
+			int dailyDistance, String comment) {
 		super();
 		this.dailyId = dailyId;
 		this.userId = userId;
+		this.nickname = nickname;
 		this.sportsId = sportsId;
 		this.date = date;
 		this.dailyTime = dailyTime;
 		this.dailyDistance = dailyDistance;
 		this.comment = comment;
 	}
+
+
 
 	public int getDailyId() {
 		return dailyId;
@@ -81,13 +87,25 @@ public class Daily {
 		this.comment = comment;
 	}
 
-	@Override
-	public String toString() {
-		return "Daily [dailyId=" + dailyId + ", userId=" + userId + ", sportsId=" + sportsId + ", date=" + date
-				+ ", dailyTime=" + dailyTime + ", dailyDistance=" + dailyDistance + ", comment=" + comment + "]";
+	public String getNickname() {
+		return nickname;
 	}
 
-	
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Daily [dailyId=" + dailyId + ", userId=" + userId + ", nickname=" + nickname + ", sportsId=" + sportsId
+				+ ", date=" + date + ", dailyTime=" + dailyTime + ", dailyDistance=" + dailyDistance + ", comment="
+				+ comment + "]";
+	}
+
 	
 }
 

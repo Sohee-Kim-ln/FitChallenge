@@ -7,15 +7,15 @@
  
  	<!-- 팀 목표 생성 -->
  	<insert id="insertGoal" parameterType="Goal" keyProperty="goalId" useGeneratedKeys="true">
- 		INSERT INTO `goal`(team_id,sports_id,goal_time,goal_distance)
-		VALUES (#{teamId},#{sportsId},#{goalTime},#{goalDistance});
+ 		INSERT INTO `goal`(team_id, sports_id, goal_time, goal_distance)
+		VALUES (#{teamId}, #{sportsId}, #{goalTime}, #{goalDistance});
  	</insert>
  	
  	<!-- 팀 id에 맞는 목표 리스트 가져오기 -->
  	<select id="selectGoals" parameterType="int" resultType="Goal">
 		SELECT goal_id as goalId, team_id as teamId, sports_id as sportsId, goal_time as goalTime, goal_distance as goalDistance
 		FROM goal
-		WHERE team_id=#{teamId};
+		WHERE team_id=#{teamId} AND visible=1;
  	</select>
 
 	<!-- 목표 id에 맞는 목표 1개 가져오기(팀 달성인원계산X) -->

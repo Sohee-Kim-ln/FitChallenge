@@ -9,6 +9,16 @@
 		INSERT INTO daily (user_id, sports_id, daily_time,daily_distance,comment)
 		VALUES(#{userId},#{sportsId},#{dailyTime},#{dailyDistance},#{comment});
 	</insert>
+	
+	<!-- 데일리 여러개 등록 -->
+	<insert id="insertDailies" parameterType="java.util.List" keyProperty="dailyId" useGeneratedKeys="true">
+		INSERT INTO daily (user_id, sports_id, daily_time,daily_distance,comment)
+		VALUES
+			<foreach item="item" collection="list" separator=",">
+			(#{item.userId},#{item.sportsId},#{item.dailyTime},#{item.dailyDistance},#{item.comment})
+			</foreach>
+		;
+	</insert>
 
 	<!-- 유저 id와 기간에 맞는 데일리 기록 가져오기 -->
 	<select id="selectDailyByUser" parameterType="DailySearchCondition" resultType="Daily">
@@ -19,10 +29,11 @@
 
 	<!-- 팀 id와 기간에 맞는 데일리 기록 가져오기 -->
 	<select id="selectDailyByTeam" parameterType="DailySearchCondition" resultType="Daily">
-		SELECT d.daily_id as dailyId, d.user_id as userId, d.sports_id as sportsId, d.date as date, d.daily_time as dailyTime, d.daily_distance as dailyDistance, d.comment as comment
+		SELECT d.daily_id as dailyId, d.user_id as userId, u.nickname as nickname, d.sports_id as sportsId, d.date as date, d.daily_time as dailyTime, d.daily_distance as dailyDistance, d.comment as comment
 		FROM daily as d, team as t, user as u
 		WHERE u.team_id=t.team_id AND d.user_id=u.user_id
-				AND Year(date)=#{year} AND Month(date)=#{month} AND t.team_id=#{teamId};
+				AND Year(date)=#{year} AND Month(date)=#{month} AND t.team_id=#{teamId}
+		ORDER BY reg_date, userId, date;
 	</select>
 	
 	<!-- 위클리 계산을 위해 유저 id와 팀 id에 맞는 이번주 기록들을 위클리 형태로 가져오기 -->
@@ -38,6 +49,30 @@
 		                     WHERE team_id=${teamId})
 	;
 	</select>
+	
+	
+	<!-- // 주 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> weekStat(DailySearchCondition condition); -->
+	<select id="weekStat" parameterType="DailySearchCondition" resultType="Weekly">
+		SELECT sports_id ad sportsId, user_id as userId, date, daily_time as dailyTime, daily_distance as dailyDistance
+		FROM daily
+		WHERE Year(date)=#{year} AND Month(date)=#{month} AND user_id=#{userId};
+	</select>
+	
+	<!-- // 월 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> monthStat(DailySearchCondition condition); -->
+	
+	<!-- // 년 단위로 총 거리, 총 시간 합산 데이터 가져오기
+	public List<Weekly> yearStat(DailySearchCondition condition); -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- 팀에 속한 유저들의, 팀 목표들에 해당하는 이번 주 위클리 전부 가져오기(성취도 계산 안함) -->
 	<select id="selectWeeklysThisWeek" parameterType="int" resultType="Weekly">
