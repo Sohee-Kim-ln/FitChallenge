@@ -6,7 +6,7 @@
         height="auto"
         max-width="200"
         max-height="200"
-        src="@/assets/sports/weight.png"
+        src="@/assets/sports/swimming.png"
         alt="유저 이미지"
         class="team-image py-8"
       ></v-img>

@@ -5,6 +5,14 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default{
+  name:"IndexInfo",
+  created(){
+    this.$router.replace("/home/main");
+  }
+}
+
+</script>
 
 <style></style>

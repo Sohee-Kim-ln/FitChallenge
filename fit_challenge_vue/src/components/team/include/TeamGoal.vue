@@ -10,14 +10,15 @@
             :key="index"
             small
           >
-            
             <div class="text-h6">
               <strong> {{ goal.sportsId | sportsFilter }}</strong>
               {{ goal.goalTime | timeFilter }}
               {{ goal.goalDistance | distFilter }}
             </div>
           </v-timeline-item>
-          <div v-if="goals.length===0" class="text-h6">설정된 목표가 없습니다.</div>
+          <div v-if="goals.length === 0" class="text-h6">
+            설정된 목표가 없습니다.
+          </div>
         </v-timeline>
       </v-col>
       <v-col class="d-flex align-center justify-center flex-column">
@@ -25,12 +26,18 @@
         <div class="text-h4">{{ team.teamArchieve | archieveFilter }}</div>
       </v-col>
     </v-row>
-    <v-row v-if="loginUser.teamId==this.$route.params.teamId"> 
+
+    <v-row v-if="loginUser && loginUser.teamId == this.$route.params.teamId">
       <v-col v-if="loginUser.isOwner">
-        <v-btn color="primary white--text text-h6" elevation="2" @click="updateGoal" >목표 수정하기</v-btn>
+        <v-btn
+          color="primary white--text text-h6"
+          elevation="2"
+          @click="updateGoal"
+          >목표 수정하기</v-btn
+        >
       </v-col>
       <v-spacer></v-spacer>
-      </v-row>
+    </v-row>
   </div>
 </template>
 
@@ -44,12 +51,12 @@ export default {
     ...mapState(["team"]),
     ...mapState(["loginUser"]),
   },
-  methods:{
-    updateGoal(){
-      let url = "/team/"+this.team.teamId+"/goalUpdate";
+  methods: {
+    updateGoal() {
+      let url = "/team/" + this.team.teamId + "/goalUpdate";
       this.$router.push(url);
-    }
-  }
+    },
+  },
 };
 </script>
 

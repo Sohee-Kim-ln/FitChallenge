@@ -6,9 +6,21 @@
       width="auto"
       max-width="200"
       max-height="200"
+      src="@/assets/sports/running.png"
+      alt="팀 이미지"
+      class="team-image py-8 my-6"
+      v-if="!loginUser"
+    ></v-img>
+
+
+    <v-img
+      width="auto"
+      max-width="200"
+      max-height="200"
       src="@/assets/sports/swimming.png"
       alt="팀 이미지"
       class="team-image py-8 my-6"
+      v-if="loginUser"
     ></v-img>
     <span v-if="loginUser" class="text-h4">{{ loginUser.nickname }}</span>
 

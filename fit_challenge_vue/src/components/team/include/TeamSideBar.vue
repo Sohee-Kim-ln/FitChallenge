@@ -1,6 +1,7 @@
 <template>
   <div class>
     <v-container class="d-flex flex-column justify-center align-center">
+      
       <v-img
         width="auto"
         height="auto"
@@ -11,7 +12,8 @@
         class="team-image py-8"
       ></v-img>
 
-      <h1 class="my-10" v-if="loginUser.teamId !== team.teamId">
+      <div v-if="loginUser">
+        <h1 class="my-10" v-if="loginUser.teamId !== team.teamId">
         {{ team.teamName }}
       </h1>
       <h1 class="my-10" v-if="loginUser.teamId === team.teamId">
@@ -19,6 +21,15 @@
           {{ team.teamName }}
         </v-badge>
       </h1>
+      </div>
+
+      <div v-if="!loginUser">
+        <h1 class="my-10">
+        {{ team.teamName }}
+      </h1>
+      </div>
+
+
 
       <v-item-group>
         <v-item v-slot="{ active }" class="my-6">
@@ -69,7 +80,7 @@
             @click="moveToDaily"
           >
             <div class="flex-grow-1 text-center">
-              <strong>운동 기록하기</strong>
+              <strong>내 운동 기록하기</strong>
             </div>
           </v-card>
         </v-item>
@@ -89,24 +100,28 @@ export default {
   },
   methods: {
     moveToGoal() {
-      const targetPath = `/team/${this.team.teamId}`;
+      const targetPath = `/team/${this.$route.params.teamId}`;
       if (this.$route.path !== targetPath) {
         this.$router.push(targetPath);
       }
     },
     moveToInfo() {
-      const targetPath = `/team/${this.team.teamId}/info`;
+      const targetPath = `/team/${this.$route.params.teamId}/info`;
       if (this.$route.path !== targetPath) {
         this.$router.push(targetPath);
       }
     },
     moveToRecord() {
-      const targetPath = `/team/${this.team.teamId}/record`;
+      const targetPath = `/team/${this.$route.params.teamId}/record`;
       if (this.$route.path !== targetPath) {
         this.$router.push(targetPath);
       }
     },
     moveToDaily() {
+      if(!this.loginUser){
+      alert("로그인이 필요합니다.");
+      return;
+      }
       const targetPath = `/user/${this.$store.state.loginUser.userId}/daily`;
       if (this.$route.path !== targetPath) {
         this.$router.push(targetPath);
